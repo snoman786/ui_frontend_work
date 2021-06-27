@@ -16,11 +16,13 @@ class AddUserComponent extends Component{
     }
     saveUser = (e) => {
         e.preventDefault();
-        let requestBody = {userName: this.state.userName, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
+        console.log("Adding the user for body :::: >>>" + {userName: this.state.userName, firstName: this.state.firstName, 
+            lastName: this.state.lastName, age: this.state.age, salary: this.state.salary});
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestBody)
+            body: JSON.stringify({userName: this.state.userName, firstName: this.state.firstName, 
+                lastName: this.state.lastName, age: this.state.age, salary: this.state.salary})
         };
        fetch('/users', requestOptions)
             .then(response => response.json())

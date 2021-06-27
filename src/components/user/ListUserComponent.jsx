@@ -8,7 +8,6 @@ class ListUserComponent extends Component{
             users : [],
             message : null
         }
-        
     }
 
    async componentDidMount(){
@@ -17,7 +16,6 @@ class ListUserComponent extends Component{
     this.setState({users: body});
     }
     
-
     addUser() {
         window.localStorage.removeItem("userId");
         this.props.history.push('/add-user');
@@ -26,6 +24,21 @@ class ListUserComponent extends Component{
     editUser(id) {
         window.localStorage.setItem("userId", id);
         this.props.history.push('/edit-user');
+    }
+
+    deleteUser(id){
+        console.log("Deleting the Id ::: >> " + id);
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        fetch('/users/'+id, requestOptions)
+        .then(res => {
+        this.setState({ message : 'User Deleted successfully.'});
+        this.setState({users: this.state.users.filter(user => user.id !== id)});
+        })
+        this.props.history.push('/users');   
     }
 
     render(){
@@ -58,6 +71,7 @@ class ListUserComponent extends Component{
                                         <td>{user.salary}</td>
                                         <td>
                                         <button className="btn btn-success" onClick={() => this.editUser(user.id)}> Edit</button>
+                                        <button className="btn btn-success" onClick={() => this.deleteUser(user.id)}> Delete</button>
                                         </td>
                                     </tr>
                             )
