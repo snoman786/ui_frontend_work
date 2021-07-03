@@ -3,13 +3,14 @@ import ListUserComponent from "./user/ListUserComponent";
 import AddUserComponent from './user/AddUserComponent';
 import EditUserComponent from './user/EditUserComponent';
 import React from "react";
+import './ReactRouter.css';
 
 const AppRouter = () => {
     return(
         <div>
             <Router>
-                <div className="col-md-6">
-                    <h1 className="text-center" style={style}>React User Application</h1>
+                <div className="container">
+                    <h1 style={style}>React User Application</h1>
                     <Switch>
                         <Route path="/" exact component={ListUserComponent} />
                         <Route path="/users" component={ListUserComponent} />
@@ -23,7 +24,7 @@ const AppRouter = () => {
 }
 
 const style = {
-    color: 'red',
+    color: 'purple',
     margin: '10px'
 }
 

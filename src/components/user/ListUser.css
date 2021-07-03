@@ -1,0 +1,32 @@
+.table,th,td,tr{
+    border: 1px solid black;
+    width: 500 px;
+    padding: 10px;
+    position:relative;
+    height: 10px;
+}
+td{
+    width: 150px;
+}
+.header{
+    background-color: slategrey;
+    height: 10px;
+}
+
+button{
+    color:red;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid red;
+}
+
+.xyz{
+    border: none;
+}
+
+div{
+    position: fixed;
+    text-align: center;
+}

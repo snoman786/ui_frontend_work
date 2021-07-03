@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './ListUser.css';
 
 class ListUserComponent extends Component{
 
@@ -45,17 +46,17 @@ class ListUserComponent extends Component{
         const {users} = this.state;
         return(
             <div>
-                <h2 className="text-center">User Details</h2>
-                <button className="btn btn-danger" onClick={ () => this.addUser()} >Add User</button> 
-                <table className="table table-striped">
+                <h2>User Details</h2>
+                <button onClick={ () => this.addUser()} >Add User</button> 
+                <table>
                     <thead>
                         <tr>
-                            <th className="hidden">Id</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>UserName</th>
-                            <th>Age</th>
-                            <th>Salary</th>
+                            <th className="header">Id</th>
+                            <th className="header">FirstName</th>
+                            <th className="header">LastName</th>
+                            <th className="header">UserName</th>
+                            <th className="header">Age</th>
+                            <th className="header">Salary</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,14 +65,15 @@ class ListUserComponent extends Component{
                            users && users.map(
                                 user =>
                                     <tr key={user.id}>
+                                        <td>{user.id}</td>
                                         <td>{user.firstName}</td>
                                         <td>{user.lastName}</td>
-                                        <td>{user.username}</td>
+                                        <td>{user.userName}</td>
                                         <td>{user.age}</td>
                                         <td>{user.salary}</td>
-                                        <td>
-                                        <button className="btn btn-success" onClick={() => this.editUser(user.id)}> Edit</button>
-                                        <button className="btn btn-success" onClick={() => this.deleteUser(user.id)}> Delete</button>
+                                        <td className="xyz">
+                                        <button onClick={() => this.editUser(user.id)}> Edit</button>
+                                        <button  onClick={() => this.deleteUser(user.id)}> Delete</button>
                                         </td>
                                     </tr>
                             )
