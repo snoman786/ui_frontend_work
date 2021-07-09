@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import ListUserComponent from "./user/ListUserComponent";
-import AddUserComponent from './user/AddUserComponent';
-import EditUserComponent from './user/EditUserComponent';
+import ListUserComponent from "../user/list/ListUserComponent";
+import AddUserComponent from '../user/add/AddUserComponent';
+import EditUserComponent from '../user/edit/EditUserComponent';
 import React from "react";
 import './ReactRouter.css';
 
