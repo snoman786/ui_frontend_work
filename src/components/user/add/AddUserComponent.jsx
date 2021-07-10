@@ -1,66 +1,103 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
-function AddUserComponent(props){
+import { TextField,Button } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 
-    const[firstName,setFirstName] = useState(['']);
-    const[lastName,setLastName]  = useState(['']);
-    const[userName,setUserName] = useState(['']);
-    const[age,setAge] = useState(['']);
-    const[salary,setSalary] = useState(['']);
-    const[message,setMessage] = useState();
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(2),
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '300px',
+            color: 'springgreen',
+        },
+        '& .MuiButtonBase-root': {
+            margin: theme.spacing(2),
+            color: 'springgreen',
+        },
+    },
+}));
 
-const saveUser = (e) => {
-    e.preventDefault();
-    console.log("Adding the user for body :::: >>>" + 
-    {userName: userName, firstName: firstName, 
-        lastName: lastName, age: age, salary: salary});
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({userName: userName, firstName: firstName, 
-            lastName: lastName, age: age, salary: salary})
-    };
-    fetch('/users', requestOptions)
-        .then(response => response.json())
-        .then(data => setMessage('User added successfully.'));
+function AddUserComponent(props) {
+
+    const [firstName, setFirstName] = useState(['']);
+    const [lastName, setLastName] = useState(['']);
+    const [userName, setUserName] = useState(['']);
+    const [age, setAge] = useState(['']);
+    const [salary, setSalary] = useState(['']);
+    const [message, setMessage] = useState();
+
     
+
+    const classes = useStyles();
+
+    const saveUser = (e) => {
+        e.preventDefault();
+        console.log("Adding the user for body :::: >>>" +
+        {
+            userName: userName, firstName: firstName,
+            lastName: lastName, age: age, salary: salary
+        });
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userName: userName, firstName: firstName,
+                lastName: lastName, age: age, salary: salary
+            })
+        };
+        fetch('/users', requestOptions)
+            .then(response => response.json())
+            .then(data => setMessage('User added successfully.'));
+
+        props.history.push('/users');
     }
 
-    return(<div>
+    return (<div>
         <h2 className="text-center">Add User</h2>
-        <form>
-        <div className="form-group">
-            <label>User Name:</label>
-            <input type="text" placeholder="userName" name="userName" className="form-control" 
-            value={userName} onChange = { e => setUserName(e.target.value)}/>
-        </div>
-        <div className="form-group">
-            <label>First Name:</label>
-            <input placeholder="First Name" name="firstName" className="form-control" value={firstName} 
-             onChange = { e => setFirstName(e.target.value)}/>
-        </div>
+        <form className={classes.root}>
+            <TextField
+                label="User Name"
+                variant="filled"
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
+            />
+            <TextField
+                label="First Name"
+                variant="filled"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+            />
+            <TextField
+                label="Last Name"
+                variant="filled"
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
+            />
+            <TextField
+                label="Age"
+                variant="filled"
+                value={age}
+                onChange={e => setAge(e.target.value)}
+            />
+            <TextField
+                label="Salary"
+                variant="filled"
+                value={salary}
+                onChange={e => setSalary(e.target.value)}
+            />
 
-        <div className="form-group">
-            <label>Last Name:</label>
-            <input placeholder="Last name" name="lastName" className="form-control" value={lastName} 
-            onChange = { e => setLastName(e.target.value)}/>
-        </div>
+            <Button startIcon={<SaveIcon/>} variant = "contained" color="primary" size="small" 
+              onClick = {saveUser}>Add</Button>
 
-        <div className="form-group">
-            <label>Age:</label>
-            <input type="number" placeholder="age" name="age" className="form-control" value={age} 
-            onChange = { e => setAge(e.target.value)}/>
-        </div>
 
-        <div className="form-group">
-            <label>Salary:</label>
-            <input type="number" placeholder="salary" name="salary" className="form-control" 
-            value={salary} onChange = { e => setSalary(e.target.value)}/>
-        </div>
-
-        <button className="btn btn-success" onClick={saveUser}>Save</button>
-    </form>
-</div>);
+        </form>
+    </div>);
 
 }
 

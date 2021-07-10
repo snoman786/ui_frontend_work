@@ -1,6 +1,31 @@
 import React, {useEffect, useState} from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
+import { TextField,Button } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
+import { CallMissedSharp } from '@material-ui/icons';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(2),
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '300px',
+            color: 'springgreen',
+        },
+        '& .MuiButtonBase-root': {
+            margin: theme.spacing(2),
+            color: 'springgreen',
+        },
+    },
+}));
+
 function EditUserComponent(props){
+
     const[id,setId] =useState(['']);
     const[firstName,setFirstName] = useState(['']);
     const[lastName,setLastName]  = useState(['']);
@@ -8,6 +33,8 @@ function EditUserComponent(props){
     const[age,setAge] = useState(['']);
     const[salary,setSalary] = useState(['']);
     const[message,setMessage] = useState();
+
+    const classes = useStyles();
 
     useEffect(() => {
         loadUser();
@@ -42,39 +69,43 @@ function EditUserComponent(props){
         return(
             <div>
                     <h2 className="text-center">Edit User</h2>
-                    <form>
-    
-                        <div className="form-group">
-                            <label>User Name:</label>
-                            <input type="text" placeholder="userName" name="userName" className="form-control" readonly="true" 
-                            defaultValue={userName}/>
-                        </div>
-    
-                        <div className="form-group">
-                            <label>First Name:</label>
-                            <input placeholder="First Name" name="firstName" className="form-control" value={firstName} 
-                            onChange = { e => setFirstName(e.target.value)}/>
-                        </div>
-    
-                        <div className="form-group">
-                            <label>Last Name:</label>
-                            <input placeholder="Last name" name="lastName" className="form-control" value={lastName} 
-                            onChange = { e => setLastName(e.target.value)}/>
-                        </div>
-    
-                        <div className="form-group">
-                            <label>Age:</label>
-                            <input type="number" placeholder="age" name="age" className="form-control" value={age} 
-                            onChange = { e => setAge(e.target.value)}/>
-                        </div>
-    
-                        <div className="form-group">
-                            <label>Salary:</label>
-                            <input type="number" placeholder="salary" name="salary" className="form-control" value={salary} 
-                            onChange = { e => setSalary(e.target.value)}/>
-                        </div>
-    
-                        <button className="btn btn-success" onClick={saveUser}>Save</button>
+                    <form className = {classes.root}>
+
+                <TextField
+                label="User Name"
+                variant="filled"
+                value={userName}
+                readonly
+                onChange={e => setUserName(e.target.value)}
+            />
+            <TextField
+                label="First Name"
+                variant="filled"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+            />
+            <TextField
+                label="Last Name"
+                variant="filled"
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
+            />
+            <TextField
+                label="Age"
+                variant="filled"
+                value={age}
+                onChange={e => setAge(e.target.value)}
+            />
+            <TextField
+                label="Salary"
+                variant="filled"
+                value={salary}
+                onChange={e => setSalary(e.target.value)}
+            />
+
+            <Button startIcon={<SaveIcon/>} variant = "contained" color="primary" size="small" 
+              onClick = {saveUser}>Add</Button>
+                        
                     </form>
                 </div>
         );

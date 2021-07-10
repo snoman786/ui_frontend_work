@@ -1,7 +1,26 @@
 import React, {useEffect, useState} from 'react';
-import './ListUser.css';
+import { Button,ButtonGroup } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import SaveIcon from '@material-ui/icons/Save';
+
+
+const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+  });
 
 function ListUserComponent(props){
+    const classes = useStyles();
 
     const[users,setUsers] =useState([]);
     const[message,setMessage] = useState();
@@ -44,40 +63,44 @@ function ListUserComponent(props){
     return(
         <div>
             <h2>User Details</h2>
-            <button onClick={ () => addUser()} >Add User</button> 
-            <table>
-                <thead>
-                    <tr>
-                        <th className="header">Id</th>
-                        <th className="header">FirstName</th>
-                        <th className="header">LastName</th>
-                        <th className="header">UserName</th>
-                        <th className="header">Age</th>
-                        <th className="header">Salary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                       
-                       users && users.map(
-                            user =>
-                                <tr key={user.id}>
-                                    <td>{user.id}</td>
-                                    <td>{user.firstName}</td>
-                                    <td>{user.lastName}</td>
-                                    <td>{user.userName}</td>
-                                    <td>{user.age}</td>
-                                    <td>{user.salary}</td>
-                                    <td className="xyz">
-                                    <button onClick={() => editUser(user.id)}> Edit</button>
-                                    <button  onClick={() => deleteUser(user.id)}> Delete</button>
-                                    </td>
-                                </tr>
-                        )
-                        }
-                    
-                </tbody>
-            </table>
+            <Button startIcon={<SaveIcon/>} variant = "contained" color="primary" size="small" 
+              onClick = {addUser}>Add User</Button>
+            
+            <TableContainer component={Paper}>
+      <Table className={classes.table} size="small" aria-label="user table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell align="right">First Name</TableCell>
+            <TableCell align="right">Last Name</TableCell>
+            <TableCell align="right">User Name</TableCell>
+            <TableCell align="right">Age</TableCell>
+            <TableCell align="right">Salary</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {users.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell component="th" scope="row">
+                {user.id}
+              </TableCell>
+              <TableCell align="right">{user.firstName}</TableCell>
+              <TableCell align="right">{user.lastName}</TableCell>
+              <TableCell align="right">{user.userName}</TableCell>
+              <TableCell align="right">{user.age}</TableCell>
+              <TableCell align="right">{user.salary}</TableCell>
+              <ButtonGroup>
+              <Button startIcon={<EditIcon/>} variant = "contained" color="primary" size="small" 
+                   onClick = {() => editUser(user.id)}></Button>
+              <Button startIcon={<DeleteIcon />} variant = "contained" color="secondary" size="small"  
+              onClick = {() => deleteUser(user.id)}></Button>
+              </ButtonGroup>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    
         </div>
     );
 
