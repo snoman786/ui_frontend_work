@@ -75,7 +75,7 @@ function EditUserComponent(props){
                 label="User Name"
                 variant="filled"
                 value={userName}
-                readonly
+                disabled
                 onChange={e => setUserName(e.target.value)}
             />
             <TextField
