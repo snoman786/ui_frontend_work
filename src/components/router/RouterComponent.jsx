@@ -3,11 +3,17 @@ import ListUserComponent from "../user/list/ListUserComponent";
 import AddUserComponent from '../user/add/AddUserComponent';
 import EditUserComponent from '../user/edit/EditUserComponent';
 import React from "react";
-import './ReactRouter.css';
+import classes from './ReactRouter-module.css';
 import ProductList from '../product/list/ProductList';
+import Aux from '../hoc/AuxComp';
+import NavItem from '../navigation/NavItem';
 
 const AppRouter = () => {
     return(
+        <Aux>
+            <ul className = {classes.Router}>
+                <NavItem link = "/" active>Users</NavItem>
+            </ul>
         <div>
             <Router>
                 <div className="container">
@@ -22,6 +28,8 @@ const AppRouter = () => {
                 </div>
             </Router>
         </div>
+
+        </Aux>
     )
 }
 
