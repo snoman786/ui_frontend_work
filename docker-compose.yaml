@@ -13,7 +13,7 @@ services:
     ports:
       - "8080:8080"
   uiSrv:
-    image: snoman/uiimg:V1
+    image: snoman1/uiimg:V2
     ports:
       - "3000:3000"
 volumes:
