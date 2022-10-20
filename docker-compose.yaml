@@ -1,0 +1,20 @@
+version: "3"
+services:
+  dbSrv:
+    image: snoman1/dbimg:V1
+    ports:
+      - "3306:3306"
+    volumes:
+      - testdbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+  apiSrv:
+    image: snoman1/backend-app:V1
+    ports:
+      - "8080:8080"
+  uiSrv:
+    image: snoman/uiimg:V1
+    ports:
+      - "3000:3000"
+volumes:
+  testdbdata: {}
