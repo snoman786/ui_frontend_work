@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-app
+  template:
+    metadata:
+      labels:
+        app: ui-app
+    spec:
+      containers:
+        - name: ui-app
+          image: snoman1/uiimg:V2
+          ports:
+            - name: ui-port
+              containerPort: 3000
+      initContainers:
+        - name: init-mydb
+          image: busybox
+          command: ['sh', '-c', 'until nslookup dbsrv; do echo waiting for dbsrv; sleep 2; done;']
