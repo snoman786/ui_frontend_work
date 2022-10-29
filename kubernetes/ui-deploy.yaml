@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ui-app
-          image: snoman1/uiimg:V2
+          image: snoman1/uiimg:V3
           ports:
             - name: ui-port
               containerPort: 3000
